@@ -2,6 +2,8 @@ import StaticArrays.SVector
 import GeometryBasics: Point
 import Rotations.RotMatrix
 
+export Point, Path, MultiPath
+
 struct Path <: AbstractVector{Point}
     points::Vector{Point}
 end

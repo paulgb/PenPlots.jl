@@ -2,6 +2,8 @@ import StaticArrays.SVector
 import Colors: RGB, distinguishable_colors
 import GeometryBasics: Point
 
+export Layer, PenPlot
+
 struct Layer
     name::String
     paths::MultiPath
@@ -50,5 +52,3 @@ struct PenPlot
 		new(new_layers)
 	end
 end
-
-export Point, Path, MultiPath, Layer, PenPlot
