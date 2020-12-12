@@ -1,5 +1,10 @@
 module PenPlots
 
-# Write your package code here.
+# import StaticArrays
+
+include("geomtypes.jl")
+include("metatypes.jl")
+include("svg.jl")
+include("rotation.jl")
 
 end
