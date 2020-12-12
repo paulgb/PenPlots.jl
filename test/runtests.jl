@@ -40,6 +40,10 @@ paths = [
         for path in paths
     ]
 
+    @test isapprox(degree_rotation(90), frac_rotation(0.25))
+
+    @test isapprox(degree_rotation(90), radian_rotation(pi/2))
+
     @test isapprox(degree_rotation(90) * paths, [
         [
             Point(-p[2], p[1]) for p in path

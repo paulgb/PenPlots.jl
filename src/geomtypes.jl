@@ -4,6 +4,8 @@ import Rotations.RotMatrix
 
 export Point, Path, MultiPath
 
+const unitvec = Point(0, 1)
+
 struct Path <: AbstractVector{Point}
     points::Vector{Point}
 end
