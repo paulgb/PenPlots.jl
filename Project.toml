@@ -11,6 +11,7 @@ Rotations = "6038ab10-8711-5258-84ad-4b1120ba62dc"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
+GeometryBasics = "0.3"
 julia = "1"
 
 [extras]
