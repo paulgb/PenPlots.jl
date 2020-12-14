@@ -2,8 +2,30 @@ import StaticArrays.SVector
 import GeometryBasics: Point
 import Rotations.RotMatrix
 
-export Point, Path, MultiPath
+export Point, Path, MultiPath, unitvec
 
+"""
+The unit vector (0, 1).
+
+Useful for creating n-gons, e.g.:
+
+```jldoctest
+using PenPlots
+
+expect = [
+    [-1, 0],
+    [0, -1],
+    [1, 0],
+    [0, 1],
+]
+
+isapprox(expect, [frac_rotation(i/4) * unitvec for i in 1:4])
+
+# output
+
+true
+```
+"""
 const unitvec = Point(0, 1)
 
 struct Path <: AbstractVector{Point}

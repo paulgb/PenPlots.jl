@@ -3,10 +3,20 @@ import Colors.hex
 
 export to_svg
 
+"""
+    to_path_string(path)
+
+Returns SVG path syntax for the given path.
+"""
 function to_path_string(path::Path)
 	string("M", join(["$(point[1]),$(point[2])" for point in path], "L"))
 end
 
+"""
+	to_svg(plot)
+
+Returns an SVG representation of the given plot as a string.
+"""
 function to_svg(plot::PenPlot)
 	ext = extent(plot)
 	width = ext.lowerright[1] - ext.upperleft[1]
@@ -37,6 +47,16 @@ function to_svg(plot::PenPlot)
 	print(builder, "</svg>")
 
 	String(take!(builder))
+end
+
+function Base.show(io::IO, mime::MIME"text/html", path::Path)
+	plot = PenPlot([path])
+	Base.show(io, mime, plot)
+end
+
+function Base.show(io::IO, mime::MIME"text/html", paths::MultiPath)
+	plot = PenPlot(paths)
+	Base.show(io, mime, plot)
 end
 
 function Base.show(io::IO, mime::MIME"text/html", plot::PenPlot)

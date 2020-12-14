@@ -1,5 +1,6 @@
 using PenPlots
 using Test
+import Documenter.doctest
 import GeometryBasics: Point
 
 import Colors.RGB
@@ -24,6 +25,10 @@ paths = [
         Point(4, 17),
     ])
 ]
+
+@testset "Doctests" begin
+    doctest(PenPlots)
+end
 
 @testset "Geometric Algebra Tests" begin
     @test 4 * paths == [
