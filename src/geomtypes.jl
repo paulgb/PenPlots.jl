@@ -28,6 +28,9 @@ true
 """
 const unitvec = Point(0, 1)
 
+"""
+A 1-dimensional array of `Point`s.
+"""
 struct Path <: AbstractVector{Point}
     points::Vector{Point}
 end
