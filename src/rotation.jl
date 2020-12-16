@@ -6,7 +6,7 @@ import Rotations.RotMatrix
 Create a rotation matrix for the angle given in degrees.
 """
 function degree_rotation(deg::Real)
-    RotMatrix(pi*(deg/180))
+    RotMatrix(pi * (deg / 180))
 end
 
 """
@@ -16,7 +16,7 @@ Create a rotation matrix for the angle given as a fraction,
 i.e. 1.0 represents a full rotation and 0.5 a half rotation.
 """
 function frac_rotation(frac::Real)
-    RotMatrix(2*pi*frac)
+    RotMatrix(2 * pi * frac)
 end
 
 """

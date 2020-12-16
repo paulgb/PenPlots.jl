@@ -19,11 +19,11 @@ end
 
 mutable struct LayerMaker
     num_layers::Int
-    default_colors::Array{RGB, 1}
+    default_colors::Array{RGB,1}
     current_index::Int
 
     function LayerMaker(num_layers::Int)
-        default_colors = distinguishable_colors(num_layers, lchoices=0:40)
+        default_colors = distinguishable_colors(num_layers, lchoices = 0:40)
         new(num_layers, default_colors, 1)
     end
 end
@@ -40,7 +40,7 @@ function makelayer(layer_maker::LayerMaker, paths::MultiPath)
     Layer(name, paths, color)
 end
 
-function makelayer(layer_maker::LayerMaker, name_paths_pair::Pair{String, MultiPath})
+function makelayer(layer_maker::LayerMaker, name_paths_pair::Pair{String,MultiPath})
     color = layer_maker.default_colors[layer_maker.current_index]
     layer_maker.current_index += 1
     Layer(name_paths_pair.first, name_paths_pair.second, color)
@@ -62,15 +62,15 @@ Layers may be:
 the layer.
 """
 struct PenPlot
-	layers::Array{Layer}
+    layers::Array{Layer}
 
-	function PenPlot(layers...)
-		new_layers = []
-		layer_maker = LayerMaker(length(layers))
+    function PenPlot(layers...)
+        new_layers = []
+        layer_maker = LayerMaker(length(layers))
 
-		new_layers = map(collect(layers)) do layerdata
+        new_layers = map(collect(layers)) do layerdata
             makelayer(layer_maker, layerdata)
-		end
-		new(new_layers)
-	end
+        end
+        new(new_layers)
+    end
 end

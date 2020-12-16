@@ -40,46 +40,37 @@ function Base.getindex(path::Path, i::Int64)
     getindex(path.points, i)
 end
 
+"""
+An array of paths. Corresponds one-to-one with a layer in a plot.
+"""
 const MultiPath = Vector{Path}
 
-"""Rotation by a matrix"""
+# Rotation by a matrix.
 
 function Base.:*(rot::RotMatrix, path::Path)
-    Path([
-        rot * point for point in path.points
-    ])
+    Path([rot * point for point in path.points])
 end
 
 function Base.:*(rot::RotMatrix, paths::MultiPath)
-    MultiPath([
-        rot * path for path in paths
-    ])
+    MultiPath([rot * path for path in paths])
 end
 
-"""Multiplication by a point"""
+# Multiplication by a point.
 
 function Base.:*(point::Point, path::Path)
-    Path([
-        point * x for x in path
-    ])
+    Path([point * x for x in path])
 end
 
 function Base.:*(point::Point, paths::MultiPath)
-    MultiPath([
-        point * path for path in paths
-    ])
+    MultiPath([point * path for path in paths])
 end
 
-"""Addition with a point"""
+# Addition with a point.
 
 function Base.:+(point::Point, path::Path)
-    Path([
-        point + x for x in path
-    ])
+    Path([point + x for x in path])
 end
 
 function Base.:+(point::Point, paths::MultiPath)
-    MultiPath([
-        point + path for path in paths
-    ])
+    MultiPath([point + path for path in paths])
 end
