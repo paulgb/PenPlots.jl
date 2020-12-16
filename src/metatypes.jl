@@ -59,7 +59,7 @@ Layers may be:
 - [`Layer`](@ref) objects
 - [`MultiPath`](@ref) objects
 - `Pair{String, MultiPath}` objects, where the string becomes the name of
-the layer.
+  the layer.
 """
 struct PenPlot
     layers::Array{Layer}
