@@ -64,13 +64,27 @@ Layers may be:
 struct PenPlot
     layers::Array{Layer}
 
-    function PenPlot(layers...)
+    function PenPlot(layers...; addoutline=false)
         new_layers = []
-        layer_maker = LayerMaker(length(layers))
+        layer_maker = LayerMaker(length(layers) + (addoutline ? 1 : 0))
 
         new_layers = map(collect(layers)) do layerdata
             makelayer(layer_maker, layerdata)
         end
-        new(new_layers)
+        plot = new(new_layers)
+
+        if addoutline
+            plx = extent(plot)
+            outline = [Path([
+                plx.upperleft,
+                Point(plx.lowerright[1], plx.upperleft[2]),
+                plx.lowerright,
+                Point(plx.upperleft[1], plx.lowerright[2]),
+                plx.upperleft
+            ])]
+            push!(plot.layers, makelayer(layer_maker, outline))
+        end
+
+        plot
     end
 end
