@@ -26,6 +26,7 @@ end
 Compute the noise gradient for the given point, given a grid of control points.
 """
 function perlin_noise(control_points, point::Point)
+    rows, cols = size(control_points)
     cell = convert.(Int, (floor.(point)))
     xi, yi = cell
 
@@ -41,7 +42,7 @@ function perlin_noise(control_points, point::Point)
     n11 = dot(control_points[(xi + 1) % rows + 1, (yi + 1) % cols + 1],
         Point(xf - 1, yf - 1))
 
-    res[col, row] = smoothstep(
+    smoothstep(
         smoothstep(n00, n01, yf),
         smoothstep(n10, n11, yf),
         xf
