@@ -10,5 +10,6 @@ include("metatypes.jl")
 include("extent.jl")
 include("svg.jl")
 include("rotation.jl")
+include("noise.jl")
 
 end
