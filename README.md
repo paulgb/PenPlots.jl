@@ -1,3 +1,3 @@
 # PenPlots
 
-[Docs](paulgb.github.io/penplots.jl/dev/)
+[Docs](https://paulgb.github.io/PenPlots.jl/dev/)
