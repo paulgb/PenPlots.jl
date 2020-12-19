@@ -2,7 +2,7 @@ import StaticArrays.SVector
 import GeometryBasics: Point
 import Rotations.RotMatrix
 
-export Point, Path, MultiPath, unitvec
+export Point, Path, MultiPath, unitvec, point_matrix
 
 """
 The unit vector (0, 1).
@@ -76,4 +76,17 @@ end
 
 function Base.:+(point::Point, paths::MultiPath)
     MultiPath([point + path for path in paths])
+end
+
+"""
+    point_matrix(xs, ys)
+
+Generate a matrix by producing `Point`s for the cartesian product of the vectors
+of `x` and `y` values given. The resulting matrix will have as many columns as
+entries of `xs`, and as many rows as values of `ys`.
+"""
+function point_matrix(xs, ys)
+	xxs = xs' .* ones(length(ys))
+	yys = ys .* ones(length(xs))'
+	Point.(xxs, yys)
 end

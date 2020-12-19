@@ -1,17 +1,24 @@
 import LinearAlgebra.dot
-import GeometryBasics: Point
+import GeometryBasics.Point
+import Random.GLOBAL_RNG
 
-export control_points, perlin_noise
+export random_vector_matrix, perlin_noise
 
 """
-    control_points(rng, rows, cols)
+    random_vector_matrix([rng,] rows, cols)
 
-Produce a grid of control points for use in Perlin noise.
+Produce a matrix with the given number of rows and columns, in which every
+entry is a random unit vector. If provided, the given random number generator
+is used to determine the vectors.
 """
-function control_points(rng, rows, cols)
+function random_vector_matrix(rng, rows, cols)
 	map(frac_rotation.(rand(rng, rows, cols))) do rot
 		rot * unitvec
 	end
+end
+
+function random_vector_matrix(rows, cols)
+    random_vector_matrix(GLOBAL_RNG, rows, cols)
 end
 
 function smoothstep(v1, v2, w)

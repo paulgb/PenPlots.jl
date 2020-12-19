@@ -46,6 +46,13 @@ function makelayer(layer_maker::LayerMaker, name_paths_pair::Pair{String,MultiPa
     Layer(name_paths_pair.first, name_paths_pair.second, color)
 end
 
+function makenotch(corner::Point, prev::Point, next::Point; frac=0.05)
+    p1 = prev * frac + corner * (1-frac)
+    p2 = corner
+    p3 = next * frac + corner * (1-frac)
+    Path([p1, p2, p3])
+end
+
 """
 A plot, consisting of one or more layers.
 
@@ -75,13 +82,16 @@ struct PenPlot
 
         if addoutline
             plx = extent(plot)
-            outline = [Path([
-                plx.upperleft,
-                Point(plx.lowerright[1], plx.upperleft[2]),
-                plx.lowerright,
-                Point(plx.upperleft[1], plx.lowerright[2]),
-                plx.upperleft
-            ])]
+
+            upperright = Point(plx.lowerright[1], plx.upperleft[2])
+            lowerleft = Point(plx.upperleft[1], plx.lowerright[2])
+
+            outline = [
+                makenotch(plx.upperleft, lowerleft, upperright),
+                makenotch(upperright, plx.upperleft, plx.lowerright),
+                makenotch(plx.lowerright, upperright, lowerleft),
+                makenotch(lowerleft, plx.lowerright, plx.upperleft),
+            ]
             push!(plot.layers, makelayer(layer_maker, outline))
         end
 

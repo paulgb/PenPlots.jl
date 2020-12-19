@@ -26,6 +26,7 @@ function to_svg(plot::PenPlot)
     print(
         builder,
         """<svg
+xmlns="http://www.w3.org/2000/svg"
 height="400"
 width="100%"
 viewBox="$(ext.upperleft[1]) $(ext.upperleft[2]) $(width) $(height)">""",
