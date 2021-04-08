@@ -21,7 +21,7 @@ function to_svg(plot::PenPlot)
     repr(MIME"image/svg+xml"(), plot)
 end
 
-Base.show(io::IO, ::MIME"image/svg+xml", plot::PenPlot)
+function Base.show(io::IO, ::MIME"image/svg+xml", plot::PenPlot)
     ext = extent(plot)
     width = ext.lowerright[1] - ext.upperleft[1]
     height = ext.lowerright[2] - ext.upperleft[2]
